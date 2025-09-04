@@ -1,0 +1,66 @@
+:root{
+  --bg:#f6f8fb; --card:#ffffff; --muted:#6b7280; --accent:#0ea5e9; --primary:#0366d6;
+  --success:#16a34a; --danger:#dc2626; --glass: rgba(2,6,23,0.06);
+}
+*{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial}
+body{margin:0;background:var(--bg);color:#0b1220}
+.hidden{display:none}
+.screen{height:100vh;display:flex;align-items:center;justify-content:center}
+.brand{font-weight:800;font-size:20px}
+.brand .accent{color:var(--accent)}
+.auth-card{max-width:380px;background:var(--card);padding:28px;border-radius:12px;box-shadow:0 8px 30px var(--glass);text-align:center}
+.auth-card input{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #e6eef8}
+.auth-card button{width:100%;padding:12px;margin-top:8px;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:700}
+
+/* App layout */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,#0b2b57,#044f8b);color:#fff}
+.container{max-width:1100px;margin:18px auto;padding:0 12px}
+.row{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.panel{margin-bottom:18px}
+.card, .market-card, .portfolio-card{background:var(--card);border-radius:12px;padding:14px;box-shadow:0 6px 20px var(--glass);border:1px solid rgba(2,6,23,0.04)}
+.market-card{flex:1;min-width:320px}
+.portfolio-card{width:360px}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.muted{color:var(--muted)}
+.market-list{display:flex;flex-direction:column;gap:10px}
+.market-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.03);cursor:pointer}
+.market-row:hover{box-shadow:0 6px 18px rgba(2,6,23,0.04)}
+.market-left{display:flex;gap:12px;align-items:center}
+.market-symbol{font-weight:700}
+.spark{width:90px;height:28px}
+.market-price{font-weight:700}
+.market-change.pos{color:var(--success)}
+.market-change.neg{color:var(--danger)}
+.stat{display:flex;justify-content:space-between;padding:8px 0}
+.value{font-weight:800;font-size:18px}
+.positions-list{display:flex;flex-direction:column;gap:8px}
+.position{display:flex;justify-content:space-between;padding:8px;border-radius:8px;background:linear-gradient(180deg,#fff,#fbfdff)}
+.actions-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+button.primary{background:var(--primary);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700}
+button.secondary{background:#eef2ff;border:1px solid rgba(3,102,214,0.12);padding:10px;border-radius:8px}
+button.ghost{background:transparent;border:1px solid rgba(2,6,23,0.06);padding:8px;border-radius:8px}
+
+/* Orders */
+.orders-list{display:flex;flex-direction:column;gap:8px}
+.order-row{display:flex;justify-content:space-between;padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.03)}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(2,6,23,0.4);display:flex;align-items:center;justify-content:center;z-index:60}
+.modal-card{width:100%;max-width:520px;background:var(--card);padding:16px;border-radius:10px;box-shadow:0 10px 30px var(--glass)}
+.modal-card input, .modal-card select{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #e6eef8}
+
+/* Footer */
+.footer{max-width:1100px;margin:0 auto;padding:6px 12px;color:var(--muted);font-size:13px}
+
+/* Dark theme */
+body.dark{background:#071025;color:#e6eef8}
+body.dark .topbar{background:linear-gradient(90deg,#041028,#032a44)}
+body.dark .card, body.dark .auth-card, body.dark .modal-card{background:#071427;color:#e6eef8;border:1px solid rgba(255,255,255,0.04)}
+body.dark .auth-card input, body.dark .modal-card input{background:#021025;color:#e6eef8;border:1px solid rgba(255,255,255,0.06)}
+
+/* Mobile tweaks */
+@media(max-width:780px){
+  .row{flex-direction:column}
+  .portfolio-card{width:100%}
+  .market-card{min-width:auto}
+}
