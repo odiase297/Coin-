@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>VertexTrade — Trading Platform</title>
+
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b2b57"/>
+</head>
+<body>
+  <!-- AUTH SCREEN -->
+  <div id="auth" class="screen">
+    <div class="auth-card">
+      <div class="brand">Vertex<span class="accent">Trade</span></div>
+      <p class="muted">Sign in to your trading dashboard</p>
+      <input id="login-user" placeholder="Username" />
+      <input id="login-pass" type="password" placeholder="Password" />
+      <button id="btn-login">Sign in</button>
+      <div class="muted small">Test account: <strong>user</strong> / <strong>pass</strong></div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app" class="hidden">
+    <header class="topbar">
+      <div class="left">
+        <div class="logo">VertexTrade</div>
+        <div class="tagline muted">Simulated trading platform</div>
+      </div>
+      <div class="right">
+        <button id="btn-theme" title="Toggle theme">🌓</button>
+        <button id="btn-settings" title="Settings">⚙️</button>
+        <button id="btn-export" title="Export CSV">⬇️ CSV</button>
+        <button id="btn-logout" title="Logout">⎋</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="panel row">
+        <div class="market-card card">
+          <div class="card-header">
+            <h3>Markets</h3>
+            <div class="muted">Live crypto via CoinGecko + simulated stocks (click to quick trade)</div>
+          </div>
+          <div id="market-list" class="market-list"></div>
+        </div>
+
+        <div class="portfolio-card card">
+          <div class="card-header">
+            <h3>Portfolio</h3>
+            <div class="muted">Cash & positions</div>
+          </div>
+          <div class="card-body">
+            <div class="stat">
+              <div class="label">Cash</div>
+              <div id="cash" class="value">$1,000,000.00</div>
+            </div>
+            <div class="stat">
+              <div class="label">Total Value</div>
+              <div id="total-value" class="value">$1,000,000.00</div>
+            </div>
+            <div class="positions">
+              <h4>Positions</h4>
+              <div id="positions-list" class="positions-list muted">No positions yet</div>
+            </div>
+            <div class="actions-row">
+              <button id="btn-buy" class="primary">Buy</button>
+              <button id="btn-sell" class="secondary">Sell</button>
+              <button id="btn-orders" class="ghost">Orders</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3>Orders & History</h3>
+            <div class="muted small">Pending orders are shown while under review</div>
+          </div>
+          <div id="orders-list" class="orders-list muted">No orders yet</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer muted">VertexTrade — simulated environment (no real funds).</footer>
+  </div>
+
+  <!-- BUY MODAL -->
+  <div id="modal-buy" class="modal hidden">
+    <div class="modal-card">
+      <h3>Buy Asset</h3>
+      <label>Symbol</label>
+      <select id="buy-symbol"></select>
+      <label>Amount (USD)</label>
+      <input id="buy-amount" type="number" placeholder="1000" />
+      <div class="muted small">Large orders (≥ $100,000) may be pending for review.</div>
+      <div class="modal-actions">
+        <button id="confirm-buy" class="primary">Confirm Buy</button>
+        <button class="ghost" onclick="closeModal('modal-buy')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SELL MODAL -->
+  <div id="modal-sell" class="modal hidden">
+    <div class="modal-card">
+      <h3>Sell Asset</h3>
+      <label>Position</label>
+      <select id="sell-position"></select>
+      <label>Amount (USD)</label>
+      <input id="sell-amount" type="number" placeholder="1000" />
+      <div class="modal-actions">
+        <button id="confirm-sell" class="primary">Confirm Sell</button>
+        <button class="ghost" onclick="closeModal('modal-sell')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div id="modal-settings" class="modal hidden">
+    <div class="modal-card">
+      <h3>Settings</h3>
+      <label>Display name</label>
+      <input id="profile-name" placeholder="Your name" />
+      <label>Theme</label>
+      <select id="profile-theme"><option value="light">Light</option><option value="dark">Dark</option></select>
+      <div class="muted small" style="margin-top:10px">About: This platform is a simulated trading UI and does not trade real assets.</div>
+      <div class="modal-actions">
+        <button id="save-settings" class="primary">Save</button>
+        <button class="ghost" onclick="closeModal('modal-settings')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- register service worker for PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(()=>{ /* fail silently */ });
+    }
+    // prompt install if available
+    window.addEventListener('beforeinstallprompt', e => {
+      window.deferredPrompt = e;
+    });
+  </script>
+</body>
+</html>
